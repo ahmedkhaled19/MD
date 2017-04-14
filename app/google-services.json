@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "381720397011",
+    "firebase_url": "https://mydictionary-261ab.firebaseio.com",
+    "project_id": "mydictionary-261ab",
+    "storage_bucket": "mydictionary-261ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381720397011:android:e7f6f3af9aae61e6",
+        "android_client_info": {
+          "package_name": "com.miniapps.ahnn.mydictionary.mydictionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381720397011-qnvlu4ci3bouu8ecicbb6cf0dlsh24lm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.miniapps.ahnn.mydictionary.mydictionary",
+            "certificate_hash": "d78bcc72fe9478495d5ce701267bed4c04f9a61c"
+          }
+        },
+        {
+          "client_id": "381720397011-eqb9repeo1s9qlpkh7c5mpb6fe3c43i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdNcIlhxUE0lf5OJNc9R0GUZbNSSBcgmA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381720397011-eqb9repeo1s9qlpkh7c5mpb6fe3c43i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
