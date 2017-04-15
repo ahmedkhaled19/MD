@@ -1,6 +1,7 @@
 package com.miniapps.ahnn.mydictionary.mydictionary;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, TextToSpeech.OnInitListener {
+public class MainActivity extends AppCompatActivity implements OnClickListener, OnInitListener {
 
 
     //TTS object
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button speakButton = (Button) findViewById(R.id.speak);
+        speakButton.setOnClickListener(this);
         //check for TTS data
         Intent checkTTSIntent = new Intent();
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     public void onClick(View view) {
         EditText enteredText = (EditText) findViewById(R.id.enter);
         String word = enteredText.getText().toString().trim();
+        Log.d("LOG", word);
         speakWords(word);
 
     }
