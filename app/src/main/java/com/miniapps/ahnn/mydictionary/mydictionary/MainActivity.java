@@ -1,6 +1,9 @@
 package com.miniapps.ahnn.mydictionary.mydictionary;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View.OnClickListener;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -35,6 +38,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     }
 
+    @Override
+    public void onClick(View view) {
+        EditText enteredText = (EditText) findViewById(R.id.enter);
+        String word = enteredText.getText().toString().trim();
+        speakWords(word);
+    }
+
+
     private void speakWords(String speech) {
         //speak straight away
         myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
@@ -58,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     //setup TTS
     public void onInit(int initStatus) {
-
         //check for successful instantiation
         if (initStatus == TextToSpeech.SUCCESS) {
             if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
@@ -68,12 +78,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onClick(View view) {
-        EditText enteredText = (EditText) findViewById(R.id.enter);
-        String word = enteredText.getText().toString().trim();
-        Log.d("LOG", word);
-        speakWords(word);
-
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finishAffinity();
+        System.exit(0);
+        super.onBackPressed();
     }
 }
