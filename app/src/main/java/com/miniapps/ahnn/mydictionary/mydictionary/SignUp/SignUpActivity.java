@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.miniapps.ahnn.mydictionary.mydictionary.MainActivity;
+import com.miniapps.ahnn.mydictionary.mydictionary.HomeActivity.MainActivity;
 import com.miniapps.ahnn.mydictionary.mydictionary.R;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, SignUpView {

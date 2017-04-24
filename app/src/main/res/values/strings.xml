@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">My Dictionary</string>
+    <string name="word">Word</string>
+    <string name="meaning">Meaning</string>
+    <string name="example">Example</string>
+    <string name="save">save</string>
+    <string name="discard">discard</string>
+    <string name="edit">edit</string>
+    <string name="apply">apply</string>
+    <string name="delete">delete</string>
+    <string name="ok">ok</string>
+
+    <string-array name="langs">
+        <item>EN</item>
+        <item>FR</item>
+        <item>DE</item>
+        <item>IT</item>
+        <item>KR</item>
+        <item>CN</item>
+        <item>JP</item>
+        <item>TW</item>
+        <item></item>
+    </string-array>
 </resources>

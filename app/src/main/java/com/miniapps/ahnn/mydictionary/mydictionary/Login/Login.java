@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.miniapps.ahnn.mydictionary.mydictionary.MainActivity;
+import com.miniapps.ahnn.mydictionary.mydictionary.HomeActivity.MainActivity;
 import com.miniapps.ahnn.mydictionary.mydictionary.R;
 import com.miniapps.ahnn.mydictionary.mydictionary.SignUp.SignUpActivity;
 
@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity implements LoginView, View.OnClickL
 
     @Override
     public void onClick(View view) {
-
+ToMain();
     }
 
     @Override

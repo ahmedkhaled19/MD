@@ -15,6 +15,10 @@ public class Word {
         this.example = example;
     }
 
+    // for firebase :by nader
+    public Word() {
+    }
+
     public String getWord() {
         return word;
     }

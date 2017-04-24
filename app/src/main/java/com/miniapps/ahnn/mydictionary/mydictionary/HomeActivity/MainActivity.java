@@ -1,35 +1,54 @@
-package com.miniapps.ahnn.mydictionary.mydictionary;
+package com.miniapps.ahnn.mydictionary.mydictionary.HomeActivity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.view.View.OnClickListener;
-import android.speech.tts.TextToSpeech.OnInitListener;
-import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.miniapps.ahnn.mydictionary.mydictionary.R;
+import com.miniapps.ahnn.mydictionary.mydictionary.RecyclerViewAdapter;
+import com.miniapps.ahnn.mydictionary.mydictionary.Word;
+
+import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, OnInitListener {
-
+public class MainActivity extends AppCompatActivity implements OnInitListener {
 
     //TTS object
     private TextToSpeech myTTS;
     //status check code
     private int MY_DATA_CHECK_CODE = 0;
 
+    ArrayList<Word> list = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerViewAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button speakButton = (Button) findViewById(R.id.speak);
-        speakButton.setOnClickListener(this);
+        Word word = new Word("ahmed", "نادر", "ajhgkwWJHDLHJDBSLWAHBBDLUJHsbdkhcjbSKGDCVLjhbckjBDDCKHJBsdldjchvSLDJV");
+        Word word2 = new Word("ahmed", "نادر", "ajhgkwWJHDLHJDBSLWAHBBDLUJHsbdkhcjbSKGDCVLjhbckjBDDCKHJBsdldjchvSLDJV");
+        Word word3 = new Word("ahmed", "نادر", "ajhgkwWJHDLHJDBSLWAHBBDLUJHsbdkhcjbSKGDCVLjhbckjBDDCKHJBsdldjchvSLDJV");
+        Word word4 = new Word("khaled", "نادر", "ajhgkwWJHDLHJDBSLWAHBBDLUJHsbdkhcjbSKGDCVLjhbckjBDDCKHJBsdldjchvSLDJV");
+        list.add(word);
+        list.add(word2);
+        list.add(word3);
+        list.add(word4);
+        recyclerView=(RecyclerView)findViewById(R.id.word_list);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter=new RecyclerViewAdapter(this,list);
+        recyclerView.setAdapter(adapter);
         //check for TTS data
         Intent checkTTSIntent = new Intent();
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
@@ -37,12 +56,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     }
 
-    @Override
-    public void onClick(View view) {
-        EditText enteredText = (EditText) findViewById(R.id.enter);
-        String word = enteredText.getText().toString().trim();
-        speakWords(word);
-    }
+//    @Override
+//    public void onClick(View view) {
+//        EditText enteredText = (EditText) findViewById(R.id.enter);
+//        String word = enteredText.getText().toString().trim();
+//        speakWords(word);
+//    }
 
 
     private void speakWords(String speech) {
@@ -73,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
                 myTTS.setLanguage(Locale.US);
         } else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(this, "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sorry! Text To Speech failed... ", Toast.LENGTH_LONG).show();
         }
     }
 

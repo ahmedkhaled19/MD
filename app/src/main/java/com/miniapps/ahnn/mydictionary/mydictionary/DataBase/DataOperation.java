@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.Word;
 import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.example;
+import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.mean;
 
 /**
  * Created by AhmedKhaled on 4/16/2017.
@@ -44,44 +45,49 @@ public class DataOperation {
         base.close();
     }
 
+    // TODO: 4/24/2017 law mawgod hayraga3 -2 , law 7asal error hayraga3 -1 , 8eer kda hayeb2a success
     protected long insertData(Word word) throws SQLException {
-        open();
-        ContentValues values = new ContentValues();
-        values.put(Word, word.getWord());
-        values.put(DataBase.mean, word.getMeaning());
-        values.put(example, word.getExample());
-        //Inserting Data
-        Long newRowId = db.insert(
-                DataBase.TableName,
-                null,
-                values
-        );
-        count++;
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("count", count);
-        editor.commit();
-        close();
-        return newRowId;
+        if(Ishere(word.getWord())){
+            return -2;
+        }{
+            open();
+            ContentValues values = new ContentValues();
+            values.put(Word, word.getWord());
+            values.put(mean, word.getMeaning());
+            values.put(example, word.getExample());
+            //Inserting Data
+            Long newRowId = db.insert(
+                    DataBase.TableName,
+                    null,
+                    values
+            );
+            count++;
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("count", count);
+            editor.commit();
+            close();
+            return newRowId;
+        }
     }
 
     protected void updateData(String old, Word word) throws SQLException {
         open();
         ContentValues values = new ContentValues();
         values.put(Word, word.getWord());
-        values.put(DataBase.mean, word.getMeaning());
+        values.put(mean, word.getMeaning());
         values.put(example, word.getExample());
         db.update(DataBase.TableName, values, "word = ?", new String[]{old});
         close();
     }
 
-    protected boolean Ishere(String title) {
+    protected boolean Ishere(String English_word) {
         db = base.getReadableDatabase();
         boolean exist;
         Cursor cursor = db.query(
                 DataBase.TableName,
                 null,
                 Word + "=?",
-                new String[]{title},
+                new String[]{English_word},
                 null,
                 null,
                 null);
@@ -100,7 +106,7 @@ public class DataOperation {
         ArrayList<Word> words = new ArrayList<>();
         String[] projection = {
                 Word,
-                DataBase.mean,
+                mean,
                 example
         };
         Cursor cursor = db.query(
@@ -115,7 +121,7 @@ public class DataOperation {
             count = 0;
             while (!cursor.isAfterLast()) {
                 String w = cursor.getString(cursor.getColumnIndex(Word));
-                String m = cursor.getString(cursor.getColumnIndex(DataBase.mean));
+                String m = cursor.getString(cursor.getColumnIndex(mean));
                 String e = cursor.getString(cursor.getColumnIndex(example));
                 Word word = new Word(w, m, e);
                 words.add(word);
@@ -146,7 +152,7 @@ public class DataOperation {
                 null);
         if (cursor.moveToFirst()) {
             String w = cursor.getString(cursor.getColumnIndex(Word));
-            String m = cursor.getString(cursor.getColumnIndex(DataBase.mean));
+            String m = cursor.getString(cursor.getColumnIndex(mean));
             String e = cursor.getString(cursor.getColumnIndex(example));
             Word word = new Word(w, m, e);
             cursor.close();
