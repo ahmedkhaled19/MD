@@ -16,6 +16,7 @@ public class DataBase extends SQLiteOpenHelper {
     static final String Word = "word"; //second column
     static final String mean = "mean"; //third column
     static final String example = "example"; //fourth column
+    static final String type = "type"; //fifth column
     private static final int DATABASE_Version = 1;
 
     public DataBase(Context context) {
@@ -29,7 +30,8 @@ public class DataBase extends SQLiteOpenHelper {
                 + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + Word + " TEXT,"
                 + mean + " TEXT,"
-                + example + " TEXT);");
+                + example + " TEXT,"
+                + type + " TEXT);");
     }
 
     @Override

@@ -11,28 +11,34 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_tv_english"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:paddingLeft="8dp"
-            android:text="nader"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="@dimen/material_text_headline_regular" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/detail_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:paddingLeft="8dp"
+                android:text="nader"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/material_text_headline_regular" />
+
             <ImageView
-                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/speaker"/>
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:id="@+id/Speak_word"
+                android:src="@drawable/speaker" />
+
         </LinearLayout>
+
         <TextView
-            android:id="@+id/tv_arabic"
+            android:id="@+id/detail_meaning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -44,7 +50,7 @@
             android:textSize="@dimen/material_text_size_large" />
 
         <TextView
-            android:id="@+id/tv_meaning"
+            android:id="@+id/detail_example"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"

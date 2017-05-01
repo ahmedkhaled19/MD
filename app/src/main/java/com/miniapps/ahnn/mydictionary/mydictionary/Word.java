@@ -8,11 +8,13 @@ public class Word {
     private String word;
     private String meaning;
     private String example;
+    private String Type;
 
-    public Word(String word, String meaning, String example) {
+    public Word(String word, String meaning, String example, String type) {
         this.word = word;
         this.meaning = meaning;
         this.example = example;
+        this.Type = type;
     }
 
     // for firebase :by nader
@@ -29,5 +31,9 @@ public class Word {
 
     public String getExample() {
         return example;
+    }
+
+    public String getType() {
+        return Type;
     }
 }

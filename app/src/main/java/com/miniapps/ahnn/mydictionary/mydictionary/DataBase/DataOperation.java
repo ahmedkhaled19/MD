@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.Word;
 import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.example;
 import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.mean;
+import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.type;
 
 /**
  * Created by AhmedKhaled on 4/16/2017.
@@ -22,10 +23,10 @@ import static com.miniapps.ahnn.mydictionary.mydictionary.DataBase.DataBase.mean
 
 public class DataOperation {
 
-   private DataBase base;
-   private SQLiteDatabase db;
-   private int count;
-   private SharedPreferences sharedPref;
+    private DataBase base;
+    private SQLiteDatabase db;
+    private int count;
+    private SharedPreferences sharedPref;
 
     public int getCount() {
         count = sharedPref.getInt("count", 0);
@@ -46,15 +47,17 @@ public class DataOperation {
     }
 
     // TODO: 4/24/2017 law mawgod hayraga3 -2 , law 7asal error hayraga3 -1 , 8eer kda hayeb2a success
-    protected long insertData(Word word) throws SQLException {
-        if(Ishere(word.getWord())){
+    public long insertData(Word word) throws SQLException {
+        if (Ishere(word.getWord())) {
             return -2;
-        }{
+        }
+        {
             open();
             ContentValues values = new ContentValues();
             values.put(Word, word.getWord());
             values.put(mean, word.getMeaning());
             values.put(example, word.getExample());
+            values.put(type, word.getType());
             //Inserting Data
             Long newRowId = db.insert(
                     DataBase.TableName,
@@ -70,17 +73,18 @@ public class DataOperation {
         }
     }
 
-    protected void updateData(String old, Word word) throws SQLException {
+    public void updateData(String old, Word word) throws SQLException {
         open();
         ContentValues values = new ContentValues();
         values.put(Word, word.getWord());
         values.put(mean, word.getMeaning());
         values.put(example, word.getExample());
+        values.put(type, word.getType());
         db.update(DataBase.TableName, values, "word = ?", new String[]{old});
         close();
     }
 
-    protected boolean Ishere(String English_word) {
+    public boolean Ishere(String English_word) {
         db = base.getReadableDatabase();
         boolean exist;
         Cursor cursor = db.query(
@@ -101,7 +105,7 @@ public class DataOperation {
     }
 
 
-    protected ArrayList<Word> GetData() throws SQLException {
+    public ArrayList<Word> GetData() throws SQLException {
         db = base.getReadableDatabase();
         ArrayList<Word> words = new ArrayList<>();
         String[] projection = {
@@ -123,7 +127,8 @@ public class DataOperation {
                 String w = cursor.getString(cursor.getColumnIndex(Word));
                 String m = cursor.getString(cursor.getColumnIndex(mean));
                 String e = cursor.getString(cursor.getColumnIndex(example));
-                Word word = new Word(w, m, e);
+                String t = cursor.getString(cursor.getColumnIndex(type));
+                Word word = new Word(w, m, e, t);
                 words.add(word);
                 count++;
                 cursor.moveToNext();
@@ -138,10 +143,9 @@ public class DataOperation {
         return words;
     }
 
-    protected Word getnotification(int i) {
+    public Word getnotification(int i) {
         db = base.getReadableDatabase();
         String x = String.valueOf(i);
-        Log.e("number = ", x);
         Cursor cursor = db.query(
                 DataBase.TableName,
                 null,
@@ -154,14 +158,15 @@ public class DataOperation {
             String w = cursor.getString(cursor.getColumnIndex(Word));
             String m = cursor.getString(cursor.getColumnIndex(mean));
             String e = cursor.getString(cursor.getColumnIndex(example));
-            Word word = new Word(w, m, e);
+            String t = cursor.getString(cursor.getColumnIndex(type));
+            Word word = new Word(w, m, e, t);
             cursor.close();
             return word;
         }
         return null;
     }
 
-    protected void deleteWord(Word word) throws SQLException {
+    public void deleteWord(Word word) throws SQLException {
         open();
         String selection = Word + "=?";
         String[] selargs = {word.getWord()};

@@ -12,6 +12,9 @@ public class SharedPreference extends Application {
 
     private static final String SHARED_PREF_NAME = "DATA";
     private static final String IS_LOGGED_IN = "LOGIN";
+    private static final String IS_NOTIFC = "ISNOTIFC";
+    private static final String TIME = "TIME";
+    private static final String TIME_ChHANGE = "TIME_CHANGE";
     private static SharedPreference mInstance;
     private SharedPreferences sharedPreferences;
     private String User_ID = "ID";
@@ -46,6 +49,24 @@ public class SharedPreference extends Application {
         editor.apply();
     }
 
+    public void SetTime(int time) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putInt(TIME, time);
+        editor.apply();
+    }
+
+    public void SetTimeChange(boolean change) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(TIME_ChHANGE, change);
+        editor.apply();
+    }
+
+    public void SetNotifc(boolean flag) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(IS_NOTIFC, flag);
+        editor.apply();
+    }
+
     public boolean isLoggedIn() {
         return getSharedPreferences().getBoolean(IS_LOGGED_IN, false);
     }
@@ -53,5 +74,18 @@ public class SharedPreference extends Application {
     public String UserKey() {
         return getSharedPreferences().getString(User_ID, null);
     }
+
+    public boolean IsNotifc() {
+        return getSharedPreferences().getBoolean(IS_NOTIFC, false);
+    }
+
+    public int Time() {
+        return getSharedPreferences().getInt(TIME, 0);
+    }
+
+    public boolean TimeChange() {
+        return getSharedPreferences().getBoolean(TIME_ChHANGE, false);
+    }
+
 
 }
